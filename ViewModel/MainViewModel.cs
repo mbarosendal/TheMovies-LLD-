@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,28 +15,31 @@ namespace TheMovies_LLD_.ViewModel
 {
     public class MainViewModel
     {
-        private MovieRepository _movieRepository { get; set; }
-        public ObservableCollection<Movie> Movies { get; set; }
-        public Movie MovieToAdd { get; set; }
+        private readonly MovieRepository _movieRepository;
+        public ObservableCollection<MovieViewModel> Movies { get; }
+        public MovieViewModel MovieToAdd { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand ClearCommand { get; set; }
 
         public MainViewModel()
         {
             _movieRepository = new MovieRepository();
-            Movies = new ObservableCollection<Movie>(_movieRepository.GetAllMovies());
-            MovieToAdd = new Movie();
+            Movies = new ObservableCollection<MovieViewModel>(_movieRepository.GetAllMovies()
+                                                .Select(movie => new MovieViewModel(movie)));
+            MovieToAdd = new MovieViewModel(new Movie());
             AddCommand = new RelayCommand(x => AddMovie(), x => CanAddMovie());
+            ClearCommand = new RelayCommand(x => ClearFields());
         }
 
         private bool CanAddMovie()
         {
-            return HasAllValues();         
+            return HasAllValues();
         }
 
         private bool HasAllValues()
         {
             if (MovieToAdd.Title != null &&
-                MovieToAdd.Duration != null &&
+                MovieToAdd.Duration != null &&  
                 MovieToAdd.Genre != null)
             {
                 return true;
@@ -45,7 +49,6 @@ namespace TheMovies_LLD_.ViewModel
 
         private void AddMovie()
         {
-            // Lav et nyt Film objekt til lagring ud fra FilmToAdd
             var newMovie = new Movie
             {
                 Title = MovieToAdd.Title,
@@ -55,8 +58,14 @@ namespace TheMovies_LLD_.ViewModel
 
             _movieRepository.AddMovie(newMovie);
 
-            // Opdater ObservableCollection med det nye data
-            Movies.Add(newMovie);
+            Movies.Add(new MovieViewModel(newMovie));
+        }
+
+        private void ClearFields()
+        {
+            MovieToAdd.Title = string.Empty;
+            MovieToAdd.Duration = null;
+            MovieToAdd.Genre = string.Empty;
         }
     }
 }

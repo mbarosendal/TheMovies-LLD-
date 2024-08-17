@@ -9,8 +9,15 @@ namespace TheMovies_LLD_.Models
     public class Movie
     {
         public string Title { get; set; }
-        public int? Duration { get; set; } = null;  // made a nullable reference type to hide '0' in interface?
+        public int? Duration { get; set; } = null;
         public string Genre { get; set; }
         public string Summary => $"{Title} ({Duration}m, {Genre})";
+
+        //public Movie (string title, int? duration, string genre)
+        //{
+        //    Title = title;
+        //    Duration = duration;
+        //    Genre = genre;
+        //}
     }
 }

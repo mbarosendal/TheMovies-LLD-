@@ -14,7 +14,6 @@ namespace TheMovies_LLD_.Repository
         {
             _movies = new List<Movie>
             {
-                //testmovies
                 new Movie { Title = "Titanic", Duration = 120, Genre = "Drama" },
                 new Movie { Title = "Inception", Duration = 148, Genre = "Sci-Fi" }
             };
@@ -28,6 +27,11 @@ namespace TheMovies_LLD_.Repository
         public List<Movie> GetAllMovies() 
         { 
             return _movies;
+        }
+
+        public bool ContainsMovie(Movie movie)
+        {
+            return _movies.Contains(movie);
         }
 
     }
