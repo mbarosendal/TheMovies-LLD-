@@ -9,6 +9,6 @@
       Title="FrontPage">
 
     <Grid>
-        <TextBlock Text="Placeholder" FontSize="100"/>
+        <TextBlock Text="FrontpagePlaceholder" FontSize="100"/>
     </Grid>
 </Page>

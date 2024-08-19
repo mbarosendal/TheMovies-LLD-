@@ -32,5 +32,10 @@ namespace TheMovies_LLD_.Views
         {
             Main.Content = new FrontPage();
         }
+
+        private void btn_Schedule_Click(object sender, RoutedEventArgs e)
+        {
+            Main.Content = new SchedulePage();
+        }
     }
 }

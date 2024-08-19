@@ -47,6 +47,32 @@ namespace TheMovies_LLD_.ViewModel
             }
         }
 
+        public string Director
+        {
+            get { return _movie.Director; }
+            set
+            {
+                if (_movie.Director != value)
+                {
+                    _movie.Director = value;
+                    OnPropertyChanged(nameof(Director));
+                }
+            }
+        }
+
+        public DateTime DateTime
+        {
+            get { return _movie.PremiereDate; }
+            set
+            {
+                if (_movie.PremiereDate != value)
+                {
+                    _movie.PremiereDate = value;
+                    OnPropertyChanged(nameof(DateTime));
+                }
+            }
+        }
+
         public MovieViewModel(Movie movie)
         {
             _movie = movie ?? throw new ArgumentNullException(nameof(movie));
