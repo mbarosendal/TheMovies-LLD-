@@ -75,7 +75,7 @@ namespace TheMovies_LLD_.Repository
                                 new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new TimeSpan(21, 0, 0) }  // Friday at 21:00
                             }
                         },
-                                                new Biografsal
+                        new Biografsal
                         {
                             ID = "3",
                             Spilletider = new List<Spilletid>

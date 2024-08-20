@@ -16,7 +16,7 @@ namespace TheMovies_LLD_.ViewModel
     public class MainViewModel
     {
         private readonly MovieRepository _movieRepository;
-        public ObservableCollection<MovieViewModel> Movies { get; }
+        public ObservableCollection<MovieViewModel> Movies { get; } // + full property med OnPropChanged og backing field i stedet for movieviewmodel?
         public MovieViewModel MovieToAdd { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand ClearCommand { get; set; }

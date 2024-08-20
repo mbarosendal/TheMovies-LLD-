@@ -23,7 +23,17 @@ public class Scheduling : INotifyPropertyChanged
             _spilletider = value; 
             OnPropertyChanged(nameof(Spilletider));
         }
-    }  
+    }
+
+    public ObservableCollection<Biografsal> Biografsale
+    {
+        get => _biografsale;
+        set
+        {
+            _biografsale = value;
+            OnPropertyChanged(nameof(Biografsale));
+        }
+    }
 
     public Biografsal SelectedBiografsal
     {
@@ -35,15 +45,6 @@ public class Scheduling : INotifyPropertyChanged
             OnPropertyChanged(nameof(SelectedBiografsal));
         }
     }
-    public ObservableCollection<Biografsal> Biografsale
-    {
-        get => _biografsale;
-        set
-        {
-            _biografsale = value;
-            OnPropertyChanged(nameof(Biografsale));
-        }
-    }
 
     public Biograf SelectedBiograf
     {
@@ -53,7 +54,7 @@ public class Scheduling : INotifyPropertyChanged
             if (_selectedBiograf != value)
             {
                 _selectedBiograf = value;
-                SelectedBiografsal = null; // Clear the selected Biografsal
+                //SelectedBiografsal = null; // Clear  selected Biografsal
                 GetBiografsale();
                 OnPropertyChanged(nameof(SelectedBiograf));
             }
