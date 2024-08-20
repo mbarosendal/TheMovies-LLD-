@@ -15,12 +15,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <TextBlock Text="Register Movie" FontSize="30" FontWeight="Bold" Margin="10"/>
-
 
         <StackPanel VerticalAlignment="Center" Grid.Row="1" Margin="10" >
             <TextBlock Text="Title:"/>
@@ -29,13 +28,18 @@
             <TextBox Text="{Binding MovieToAdd.Duration, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>
             <TextBlock Text="Genre(s):"/>
             <TextBox Text="{Binding MovieToAdd.Genre, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>
+            <TextBlock Text="Instruktør:"/>
+            <TextBox Text="{Binding MovieToAdd.Director, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>
+            <TextBlock Text="Premiere dato (yyyy:mm:dd format?):"/>
+            <TextBox Text="{Binding MovieToAdd.PremiereDate, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button Content="Add" Command="{Binding AddCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
             <Button Content="Clear" Command="{Binding ClearCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
+            <Button Content="Remove" Command="{Binding RemoveCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
         </StackPanel>
 
-        <ListBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="10" ItemsSource="{Binding Movies, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Summary"/>
+        <ListBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="10" ItemsSource="{Binding Movies, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedMovie}" DisplayMemberPath="Summary"/>
     </Grid>
 </Page>

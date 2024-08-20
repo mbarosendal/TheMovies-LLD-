@@ -13,13 +13,6 @@ namespace TheMovies_LLD_.Models
         public string Genre { get; set; }
         public string Director { get; set; }
         public DateTime PremiereDate { get; set; }
-        public string Summary => $"{Title} ({Duration}m, {Genre})";
-
-        //public Movie (string title, int? duration, string genre)
-        //{
-        //    Title = title;
-        //    Duration = duration;
-        //    Genre = genre;
-        //}
+        public string Summary => $"{Title} ({Duration}m, {Genre}, {Director})";
     }
 }

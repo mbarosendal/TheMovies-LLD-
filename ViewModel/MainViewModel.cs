@@ -18,8 +18,10 @@ namespace TheMovies_LLD_.ViewModel
         private readonly MovieRepository _movieRepository;
         public ObservableCollection<MovieViewModel> Movies { get; } // + full property med OnPropChanged og backing field i stedet for movieviewmodel?
         public MovieViewModel MovieToAdd { get; set; }
+        public MovieViewModel SelectedMovie { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand ClearCommand { get; set; }
+        public ICommand RemoveCommand { get; set;}
 
         public MainViewModel()
         {
@@ -29,10 +31,32 @@ namespace TheMovies_LLD_.ViewModel
             MovieToAdd = new MovieViewModel(new Movie());
             AddCommand = new RelayCommand(x => AddMovie(), x => CanAddMovie());
             ClearCommand = new RelayCommand(x => ClearFields());
+            RemoveCommand = new RelayCommand(x => RemoveMovie(), x => CanRemoveMovie());
+        }
+
+        private bool CanRemoveMovie()
+        {
+            // Kan kun fjerne en film, hvis der er valgt en film
+            return SelectedMovie != null;
+        }
+
+        private void RemoveMovie()
+        {
+            if (SelectedMovie != null)
+            {
+                // Bruger property'en Movie fra MovieViewModel til at hente Movie-objekt som ligger bag MovieViewModellen
+                var movie = SelectedMovie.Movie;
+
+                // Fjerner filmen fra listen over film, fra repository og gemmer ændringerne i CSV-filen
+                Movies.Remove(SelectedMovie);
+                _movieRepository.RemoveMovie(movie);
+                _movieRepository.SaveMoviesToCSV(_movieRepository.GetAllMovies());
+            }
         }
 
         private bool CanAddMovie()
         {
+            // Tjekker om alle værdier er udfyldt via hjælpemetode
             return HasAllValues();
         }
 
@@ -54,11 +78,15 @@ namespace TheMovies_LLD_.ViewModel
                 Title = MovieToAdd.Title,
                 Duration = MovieToAdd.Duration,
                 Genre = MovieToAdd.Genre,
+                Director = MovieToAdd.Director,
+                PremiereDate = MovieToAdd.PremiereDate
             };
 
             _movieRepository.AddMovie(newMovie);
 
             Movies.Add(new MovieViewModel(newMovie));
+
+            _movieRepository.SaveMoviesToCSV(_movieRepository.GetAllMovies());
         }
 
         private void ClearFields()
@@ -66,6 +94,8 @@ namespace TheMovies_LLD_.ViewModel
             MovieToAdd.Title = string.Empty;
             MovieToAdd.Duration = null;
             MovieToAdd.Genre = string.Empty;
+            MovieToAdd.Director = string.Empty;
+            MovieToAdd.PremiereDate = DateTime.MinValue;
         }
     }
 }

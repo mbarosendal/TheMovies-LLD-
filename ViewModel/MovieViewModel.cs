@@ -8,6 +8,9 @@ namespace TheMovies_LLD_.ViewModel
         private Movie _movie;
         public string Summary => $"{Title} ({Duration}m, {Genre})";
 
+        // Property til at hente film-objektet bag ved movieviewmodellen.
+        public Movie Movie => _movie;
+
         public string Title
         {
             get { return _movie.Title; }
@@ -60,7 +63,7 @@ namespace TheMovies_LLD_.ViewModel
             }
         }
 
-        public DateTime DateTime
+        public DateTime PremiereDate
         {
             get { return _movie.PremiereDate; }
             set
@@ -68,7 +71,7 @@ namespace TheMovies_LLD_.ViewModel
                 if (_movie.PremiereDate != value)
                 {
                     _movie.PremiereDate = value;
-                    OnPropertyChanged(nameof(DateTime));
+                    OnPropertyChanged(nameof(PremiereDate));
                 }
             }
         }

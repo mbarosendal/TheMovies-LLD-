@@ -15,18 +15,23 @@ namespace TheMovies_LLD_.Repository
         private List<Movie> _movies;
         public MovieRepository()
         {
-            _movies = new List<Movie>
-            {
-                new Movie { Title = "Titanic", Duration = 120, Genre = "Drama, Romance" },
-                new Movie { Title = "Inception", Duration = 148, Genre = "Sci-Fi" }
-            };
+            _movies = new List<Movie>();
+            //{
+            //    new Movie { Title = "Titanic", Duration = 120, Genre = "Drama, Romance" },
+            //    new Movie { Title = "Inception", Duration = 148, Genre = "Sci-Fi" }
+            //};
             //SaveMovies(_movies);
-            //LoadMoviesfromCSV();
+            LoadMoviesfromCSV();
         }
 
         public void AddMovie(Movie movie)
         {
             _movies.Add(movie);
+        }
+
+        public void RemoveMovie(Movie movie)
+        {
+            _movies.Remove(movie);
         }
 
         public List<Movie> GetAllMovies()
@@ -39,63 +44,63 @@ namespace TheMovies_LLD_.Repository
             return _movies.Contains(movie);
         }
 
-        //public void SaveMoviesToCSV(List<Movie> movies)
-        //{
-        //    string filePath = "movies.csv";
+        public void SaveMoviesToCSV(List<Movie> movies)
+        {
+            string filePath = "movies.csv";
 
-        //    using (StreamWriter sw = new StreamWriter(filePath))
-        //    {
-        //        string header = "Title" + ";" + "Duration" + ";" + "Genre";
-        //        sw.WriteLine(header);
+            using (StreamWriter sw = new StreamWriter(filePath))
+            {
+                string header = "Title" + ";" + "Duration" + ";" + "Genre" + ";" + "Director" + ";" + "Premiere Dato" ;
+                sw.WriteLine(header);
 
-        //        foreach (Movie movie in movies)
-        //        {
-        //            string movieLine = $"{movie.Title};{movie.Duration};{movie.Genre}";
-        //            sw.WriteLine(movieLine);
-        //        }
-        //    }
-        //}
+                foreach (Movie movie in movies)
+                {
+                    string movieLine = $"{movie.Title};{movie.Duration};{movie.Genre};{movie.Director};{movie.PremiereDate}";
+                    sw.WriteLine(movieLine);
+                }
+            }
+        }
 
-        //public void LoadMoviesfromCSV()
-        //{
-        //    string filePath = "movies.csv";
+        public void LoadMoviesfromCSV()
+        {
+            string filePath = "movies.csv";
 
-        //    using (StreamReader sr = new StreamReader(filePath))
-        //    {
-        //        // SKip header
-        //        string headerLine = sr.ReadLine();
-        //        string line;
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                // SKip header
+                string headerLine = sr.ReadLine();
+                string line;
 
-        //        while ((line = sr.ReadLine()) != null)
-        //        {
-        //            string[] movieLine = line.Split(';');
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] movieLine = line.Split(';');
 
-        //            string Title = movieLine[0];
-        //            int.TryParse(movieLine[1], out int Duration);
-        //            string Genre = movieLine[2];
+                    string Title = movieLine[0];
+                    int.TryParse(movieLine[1], out int Duration);
+                    string Genre = movieLine[2];
 
-        //            if (WasMovieAlreadyAdded(Title))
-        //            {
-        //                continue;
-        //            }
-        //            else
-        //            {
-        //                Movie newMovie = new Movie()
-        //                {
-        //                    Title = Title,
-        //                    Genre = Genre,
-        //                    Duration = Duration
-        //                };
+                    if (WasMovieAlreadyAdded(Title))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        Movie newMovie = new Movie()
+                        {
+                            Title = Title,
+                            Genre = Genre,
+                            Duration = Duration
+                        };
 
-        //                AddMovie(newMovie);
-        //            }   
-        //        }
-        //    }
-        //}
+                        AddMovie(newMovie);
+                    }
+                }
+            }
+        }
 
-        //private bool WasMovieAlreadyAdded(string title)
-        //{
-        //    return _movies.Any(m => m.Title == title);
-        //}
+        private bool WasMovieAlreadyAdded(string title)
+        {
+            return _movies.Any(m => m.Title == title);
+        }
     }
 }
