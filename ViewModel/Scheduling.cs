@@ -19,7 +19,7 @@ public class Scheduling : INotifyPropertyChanged
     private Biograf _selectedBiograf;
     private Biografsal _selectedBiografsal;
     private Movie _selectedMovie;
-    //private Spilletid _selectedSpilletid;
+    private Spilletid _selectedSpilletid;
     public ICommand AddForestillingCommand { get; set; }
 
     public ObservableCollection<Spilletid> Spilletider
@@ -67,6 +67,16 @@ public class Scheduling : INotifyPropertyChanged
             }
         }
     }
+    public Spilletid SelectedSpilletid
+    {
+        get { return _selectedSpilletid; }
+        set 
+        { 
+            _selectedSpilletid = value; 
+
+        }
+    }
+
     public Movie SelectedMovie
     {
         get { return _selectedMovie; }
@@ -113,8 +123,8 @@ public class Scheduling : INotifyPropertyChanged
             Biograf = SelectedBiograf.Biografkæde,
             By = SelectedBiograf.By,
             Biografsal = SelectedBiografsal.ID,
-            Dag = SelectedBiografsal.Spilletider[0].DayOfWeek.ToString(),
-            Klokken = SelectedBiografsal.Spilletider[0].TimeOfDay.ToString(),
+            Dag = SelectedSpilletid.DayOfWeek.ToString(),
+            Klokken = SelectedSpilletid.TimeOfDay.ToString(),
             Movie = SelectedMovie.Title
         };
 
