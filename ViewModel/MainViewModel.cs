@@ -25,7 +25,9 @@ namespace TheMovies_LLD_.ViewModel
 
         public MainViewModel()
         {
+            // Opretter en ny instans af MovieRepository og henter alle film fra CSV-filen
             _movieRepository = new MovieRepository();
+            // Opretter en ObservableCollection af MovieViewModels, som indeholder alle film-objekter konverteret til MovieViewModels-objekter (LINQ)
             Movies = new ObservableCollection<MovieViewModel>(_movieRepository.GetAllMovies()
                                                 .Select(movie => new MovieViewModel(movie)));
             MovieToAdd = new MovieViewModel(new Movie());
@@ -36,7 +38,7 @@ namespace TheMovies_LLD_.ViewModel
 
         private bool CanRemoveMovie()
         {
-            // Kan kun fjerne en film, hvis der er valgt en film
+            // Kan kun trykke "Remove", hvis der er valgt en film
             return SelectedMovie != null;
         }
 
@@ -44,7 +46,7 @@ namespace TheMovies_LLD_.ViewModel
         {
             if (SelectedMovie != null)
             {
-                // Bruger property'en Movie fra MovieViewModel til at hente Movie-objekt som ligger bag MovieViewModellen
+                // Bruger property'en Movie fra MovieViewModel til at hente Movie-objektet som ligger bag MovieViewModellen
                 var movie = SelectedMovie.Movie;
 
                 // Fjerner filmen fra listen over film, fra repository og gemmer ændringerne i CSV-filen
@@ -73,6 +75,7 @@ namespace TheMovies_LLD_.ViewModel
 
         private void AddMovie()
         {
+            // Opretter et nyt Movie-objekt ud fra værdierne i MovieToAdd-instanset
             var newMovie = new Movie
             {
                 Title = MovieToAdd.Title,
@@ -91,6 +94,7 @@ namespace TheMovies_LLD_.ViewModel
 
         private void ClearFields()
         {
+            // Nulstiller værdierne i MovieToAdd
             MovieToAdd.Title = string.Empty;
             MovieToAdd.Duration = null;
             MovieToAdd.Genre = string.Empty;

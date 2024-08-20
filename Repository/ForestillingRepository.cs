@@ -13,10 +13,11 @@ namespace TheMovies_LLD_.Repository
 
         public ForestillingRepository()
         {
+            // testdata
             forestillinger = new List<Forestilling>()
             {
-                new Forestilling { Biograf = "Nordisk Film", By="Aarhus", Biografsal = "1", Dag="Friday", Klokken = "12:00", Movie = "Titanic" }, // testdata
-                new Forestilling { Biograf = "Nordisk Film", By="Randers", Biografsal= "1", Dag="Friday", Klokken = "12:00", Movie = "Titanic" }, // testdata
+                new Forestilling { Biograf = "Nordisk Film", By="Aarhus", Biografsal = "1", Dag="Friday", Klokken = "12:00", Movie = "Titanic" },
+                new Forestilling { Biograf = "Nordisk Film", By="Randers", Biografsal= "1", Dag="Friday", Klokken = "12:00", Movie = "Titanic" },
             };
         }
 

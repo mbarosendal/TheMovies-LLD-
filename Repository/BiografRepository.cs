@@ -14,6 +14,7 @@ namespace TheMovies_LLD_.Repository
 
         public BiografRepository()
         {
+            // testdata (3 biografer med hver deres biografsale og spilletider)
             Biografer = new List<Biograf>
             {
                 new Biograf

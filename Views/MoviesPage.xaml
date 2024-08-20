@@ -35,9 +35,9 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Content="Add" Command="{Binding AddCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
-            <Button Content="Clear" Command="{Binding ClearCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
-            <Button Content="Remove" Command="{Binding RemoveCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
+            <Button Content="Tilføj" Command="{Binding AddCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
+            <Button Content="Ryd" Command="{Binding ClearCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
+            <Button Content="Fjern" Command="{Binding RemoveCommand, UpdateSourceTrigger=PropertyChanged}" Width="70" Height="30"/>
         </StackPanel>
 
         <ListBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="10" ItemsSource="{Binding Movies, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedMovie}" DisplayMemberPath="Summary"/>
