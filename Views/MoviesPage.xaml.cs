@@ -24,7 +24,7 @@ namespace TheMovies_LLD_.Views
         public MoviesPage()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MovieManagementViewModel();
         }
     }
 }

@@ -9,10 +9,10 @@ namespace TheMovies_LLD_.Models
     public class Movie
     {
         public string Title { get; set; }
-        public int? Duration { get; set; } = null;
+        public TimeSpan Duration { get; set; }
         public string Genre { get; set; }
         public string Director { get; set; }
         public DateTime PremiereDate { get; set; }
-        public string Summary => $"{Title} ({Duration}m, {Genre}, {Director})";
+        public string Summary => $"{Title} ({Duration.TotalMinutes:N0}m, {Genre})";
     }
 }

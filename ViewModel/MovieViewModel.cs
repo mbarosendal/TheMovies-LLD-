@@ -1,16 +1,22 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using TheMovies_LLD_.Models;
 
 namespace TheMovies_LLD_.ViewModel
 {
+    // MovieViewModel-Klassen er fokuseret på selve film-objektet og:
+    // Indkapsler egenskaberne for en enkelt film.
+    // Giver mulighed for at interagere med den underliggende films data.
+    // Håndterer en films egenskabsændringer og opdaterer dem i UI.
+
     public class MovieViewModel : INotifyPropertyChanged
     {
         private Movie _movie;
-        public string Summary => $"{Title} ({Duration}m, {Genre})";
+        public string Summary => _movie.Summary;
 
-        // Property til at hente film-objektet bag ved movieviewmodellen.
+        // Property til at hente film-objektet bag ved MovieViewModellen.
         public Movie Movie => _movie;
-
+        
         public string Title
         {
             get { return _movie.Title; }
@@ -24,7 +30,7 @@ namespace TheMovies_LLD_.ViewModel
             }
         }
 
-        public int? Duration
+        public TimeSpan Duration
         {
             get { return _movie.Duration; }
             set
@@ -33,10 +39,10 @@ namespace TheMovies_LLD_.ViewModel
                 {
                     _movie.Duration = value;
                     OnPropertyChanged(nameof(Duration));
-                }
+                }  
             }
         }
-
+  
         public string Genre
         {
             get { return _movie.Genre; }

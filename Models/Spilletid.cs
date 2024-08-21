@@ -9,7 +9,7 @@ namespace TheMovies_LLD_.Models
     public class Spilletid
     {
         public DayOfWeek DayOfWeek { get; set; }
-        public TimeSpan TimeOfDay { get; set; }
-        public string Summary => $"{DayOfWeek} at {TimeOfDay}";
+        public DateTime TimeOfDay { get; set; }
+        public string Summary => $"{DayOfWeek} - {TimeOfDay:HH:mm}";
     }
 }

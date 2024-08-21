@@ -19,14 +19,20 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <TextBlock Text="Register Movie" FontSize="30" FontWeight="Bold" Margin="10"/>
+        <TextBlock Text="Aktuelle Film" FontSize="25" FontWeight="Bold" Margin="10"/>
 
         <StackPanel VerticalAlignment="Center" Grid.Row="1" Margin="10" >
-            <TextBlock Text="Title:"/>
+            <TextBlock Text="Titel:"/>
             <TextBox Text="{Binding MovieToAdd.Title, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>
-            <TextBlock Text="Duration:"/>
-            <TextBox Text="{Binding MovieToAdd.Duration, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>
-            <TextBlock Text="Genre(s):"/>
+            <TextBlock Text="Varighed:"/>
+            <!-- <TextBox Text="{Binding MovieToAdd.Duration, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/> -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="LEft">
+                <TextBlock Text="Timer:" Margin="5,0,5,0"/>
+                <ComboBox ItemsSource="{Binding Hours}" SelectedItem="{Binding SelectedHours, Mode=TwoWay}" Width="40" />
+                <TextBlock Text="Minutter:" Margin="5,0,5,0"/>
+                <ComboBox ItemsSource="{Binding Minutes}" SelectedItem="{Binding SelectedMinutes, Mode=TwoWay}" Width="40"/>
+            </StackPanel>
+            <TextBlock Text="Genre(r):"/>
             <TextBox Text="{Binding MovieToAdd.Genre, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>
             <TextBlock Text="Instruktør:"/>
             <TextBox Text="{Binding MovieToAdd.Director, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>

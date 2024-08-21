@@ -13,6 +13,7 @@ namespace TheMovies_LLD_.Models
         public string Biografsal { get; set; }
         public string Dag { get; set; }
         public string Klokken { get; set; }
+        public string Sluttid { get; set; }
         public string Movie { get; set; }
     }
 }

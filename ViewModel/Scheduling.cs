@@ -8,18 +8,23 @@ using TheMovies_LLD_.Repository;
 public class Scheduling : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
+
     private BiografRepository _biografRepository;
     private MovieRepository _movieRepository;
     private ForestillingRepository _forestillingRepository;
+
+    // Biografer og film skal ikke kunne ændres, så de er readonly
     public ObservableCollection<Biograf> Biografer { get; }
     public ObservableCollection<Movie> Movies { get; }
-    public ObservableCollection<Forestilling> Forestillinger { get; set; }
     private ObservableCollection<Biografsal> _biografsale;
     private ObservableCollection<Spilletid> _spilletider;
+    public ObservableCollection<Forestilling> Forestillinger { get; set; }
+
     private Biograf _selectedBiograf;
     private Biografsal _selectedBiografsal;
     private Movie _selectedMovie;
     private Spilletid _selectedSpilletid;
+
     public ICommand AddForestillingCommand { get; set; }
 
     public ObservableCollection<Spilletid> Spilletider
@@ -48,6 +53,7 @@ public class Scheduling : INotifyPropertyChanged
         set 
         { 
             _selectedBiografsal = value;
+            // Fyld spilletiderne ud når en biografsal vælges
             GetSpilletider();
             OnPropertyChanged(nameof(SelectedBiografsal));
         }
@@ -61,7 +67,7 @@ public class Scheduling : INotifyPropertyChanged
             if (_selectedBiograf != value)
             {
                 _selectedBiograf = value;
-                //SelectedBiografsal = null; // Clear  selected Biografsal
+                // Fyld biografsale ud når en biograf vælges
                 GetBiografsale();
                 OnPropertyChanged(nameof(SelectedBiograf));
             }
@@ -72,8 +78,7 @@ public class Scheduling : INotifyPropertyChanged
         get { return _selectedSpilletid; }
         set 
         { 
-            _selectedSpilletid = value; 
-
+            _selectedSpilletid = value;
         }
     }
 
@@ -102,6 +107,7 @@ public class Scheduling : INotifyPropertyChanged
 
     private bool CanAddForestilling()
     {
+        // Tjekker om alle værdier er valgt før der kan tilføjes en forestilling
         if (SelectedBiograf != null && 
             SelectedBiografsal != null && 
             SelectedMovie != null && 
@@ -118,13 +124,18 @@ public class Scheduling : INotifyPropertyChanged
     // tilføjer en forestilling til listen og til databasen ud fra valgte værdier
     private void AddForestilling()
     {
+        DateTime startTime = SelectedSpilletid.TimeOfDay;
+        TimeSpan playTime = SelectedMovie.Duration;
+        string endTime = CalculateEndTimeWithCleaningAndCommercials(startTime, playTime).ToString("HH:mm");
+
         var newForestilling = new Forestilling
         {
             Biograf = SelectedBiograf.Biografkæde,
             By = SelectedBiograf.By,
             Biografsal = SelectedBiografsal.ID,
             Dag = SelectedSpilletid.DayOfWeek.ToString(),
-            Klokken = SelectedSpilletid.TimeOfDay.ToString(),
+            Klokken = SelectedSpilletid.TimeOfDay.ToString("HH:mm"),
+            Sluttid = endTime,
             Movie = SelectedMovie.Title
         };
 
@@ -133,14 +144,26 @@ public class Scheduling : INotifyPropertyChanged
         Forestillinger.Add(newForestilling);       
     }
 
+    private DateTime CalculateEndTimeWithCleaningAndCommercials(DateTime startTime, TimeSpan playTime)
+    {
+        TimeSpan cleaningAndCommercialsTime = new TimeSpan(0, 30, 0);
+
+        // Tilføj filmens playtime og spilletid til rengøring og reklamer til starttidspunktet for at finde sluttidspunktet for forestillingen
+        DateTime endTime = startTime.Add(playTime).Add(cleaningAndCommercialsTime);
+
+        return endTime;
+    }
+
     private void GetBiografsale()
     {
         if (_selectedBiograf != null)
         {
+            // Fyld biografsale ud når en biograf vælges
             Biografsale = new ObservableCollection<Biografsal>(SelectedBiograf.Biografsale);
         }
         else
         {
+            // Clear biografsale hvis der ikke er valgt en biograf
             Biografsale.Clear();
         }
     }
@@ -149,10 +172,12 @@ public class Scheduling : INotifyPropertyChanged
     {
         if (_selectedBiografsal != null)
         {
+            // Fyld spilletiderne ud når en biografsal vælges
             Spilletider = new ObservableCollection<Spilletid>(SelectedBiografsal.Spilletider);
         }
         else
         {
+            // Clear spilletider hvis der ikke er valgt en biografsal
             Spilletider.Clear();
         }
     }

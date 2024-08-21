@@ -1,31 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using TheMovies_LLD_.Commands;
 using TheMovies_LLD_.Models;
 using TheMovies_LLD_.Repository;
 
 namespace TheMovies_LLD_.ViewModel
 {
-    public class MainViewModel
+    // MainViewModel-klassen:
+    // Håndterer de handlinger, der udføres på film-kollektionen i UI, såsom at tilføje, fjerne og rydde dem.
+    // KOnverterer og behandler input fra UI til lagring i datalaget (via repositories) og viser kollektionen til UI.
+    // Håndterer meddelelser om egenskabsændringer for den overordnede applikationstilstand.
+    // Delegerer den specifikke filmrelaterede logik til MovieViewModel.
+
+    public class MovieManagementViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
         private readonly MovieRepository _movieRepository;
         public ObservableCollection<MovieViewModel> Movies { get; } // + full property med OnPropChanged og backing field i stedet for movieviewmodel?
+        
         public MovieViewModel MovieToAdd { get; set; }
         public MovieViewModel SelectedMovie { get; set; }
+        
         public ICommand AddCommand { get; set; }
         public ICommand ClearCommand { get; set; }
         public ICommand RemoveCommand { get; set;}
+        
+        private int _selectedHours;
+        private int _selectedMinutes;
+        private TimeSpan _duration;
+        public List<int> Hours => Enumerable.Range(0, 10).ToList();
+        public List<int> Minutes => Enumerable.Range(0, 60).ToList();
 
-        public MainViewModel()
+        public TimeSpan Duration
         {
-            // Opretter en ny instans af MovieRepository og henter alle film fra CSV-filen
+            get => _duration;
+            private set
+            {
+                if (_duration != value)
+                {
+                    _duration = value;
+                    OnPropertyChanged(nameof(Duration));
+                }
+            }
+        }
+
+        public int SelectedMinutes
+        {
+            get { return _selectedMinutes; }
+            set 
+            { 
+                _selectedMinutes = value;
+                OnPropertyChanged(nameof(SelectedMinutes));
+                UpdateDuration();
+            }
+        }
+
+        public int SelectedHours
+        {
+            get { return _selectedHours; }
+            set 
+            { 
+                _selectedHours = value;
+                OnPropertyChanged(nameof(SelectedHours));
+                UpdateDuration();
+            }
+        }
+
+        public MovieManagementViewModel()
+        {
             _movieRepository = new MovieRepository();
             // Opretter en ObservableCollection af MovieViewModels, som indeholder alle film-objekter konverteret til MovieViewModels-objekter (LINQ)
             Movies = new ObservableCollection<MovieViewModel>(_movieRepository.GetAllMovies()
@@ -34,6 +87,12 @@ namespace TheMovies_LLD_.ViewModel
             AddCommand = new RelayCommand(x => AddMovie(), x => CanAddMovie());
             ClearCommand = new RelayCommand(x => ClearFields());
             RemoveCommand = new RelayCommand(x => RemoveMovie(), x => CanRemoveMovie());
+        }
+
+        // Metoder til at opdatere varigheden af den nye film ud fra valgte værdier for timer og minutter
+        private void UpdateDuration()
+        {
+            MovieToAdd.Duration = new TimeSpan(SelectedHours, SelectedMinutes, 0);
         }
 
         private bool CanRemoveMovie()
@@ -46,7 +105,7 @@ namespace TheMovies_LLD_.ViewModel
         {
             if (SelectedMovie != null)
             {
-                // Bruger property'en Movie fra MovieViewModel til at hente Movie-objektet som ligger bag MovieViewModellen
+                // Henter Movie-objektet som ligger bag MovieViewModellen fordi SelectedMovie er et MovieViewModel-objekt og repository.RemoveMovie() bruger Movie-objekter
                 var movie = SelectedMovie.Movie;
 
                 // Fjerner filmen fra listen over film, fra repository og gemmer ændringerne i CSV-filen
@@ -66,7 +125,8 @@ namespace TheMovies_LLD_.ViewModel
         {
             if (MovieToAdd.Title != null &&
                 MovieToAdd.Duration != null &&  
-                MovieToAdd.Genre != null)
+                MovieToAdd.Genre != null &&
+                MovieToAdd.Director != null)
             {
                 return true;
             }
@@ -96,10 +156,15 @@ namespace TheMovies_LLD_.ViewModel
         {
             // Nulstiller værdierne i MovieToAdd
             MovieToAdd.Title = string.Empty;
-            MovieToAdd.Duration = null;
+            //MovieToAdd.Duration = TimeSpan.Zero;
             MovieToAdd.Genre = string.Empty;
             MovieToAdd.Director = string.Empty;
             MovieToAdd.PremiereDate = DateTime.MinValue;
         }
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }

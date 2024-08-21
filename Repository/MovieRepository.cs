@@ -80,7 +80,7 @@ namespace TheMovies_LLD_.Repository
 
                     // Henter værdierne fra CSV-filen via index i arrayet
                     string Title = movieLine[0];
-                    int.TryParse(movieLine[1], out int Duration);
+                    TimeSpan.TryParse(movieLine[1], out TimeSpan Duration);
                     string Genre = movieLine[2];
 
                     // Tjek om filmen allerede er tilføjet via hjælpemetoden WasMovieAlreadyAdded (ud fra titel)

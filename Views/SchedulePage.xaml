@@ -22,7 +22,7 @@
 
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Schedule" FontSize="30" FontWeight="Bold" Margin="10"/>
+        <TextBlock Text="Forestillinger" FontSize="25" FontWeight="Bold" Margin="10"/>
         
         <TextBlock Text="Biograf" FontSize="15" Grid.Row="1"/>
         <TextBlock Text="Biografsal" FontSize="15" Grid.Row="1" Grid.Column="1"/>
@@ -44,7 +44,8 @@
                     <GridViewColumn Header="Biograf" DisplayMemberBinding="{Binding Biograf}" Width="150" />
                     <GridViewColumn Header="Biografsal" DisplayMemberBinding="{Binding Biografsal}" Width="150" />
                     <GridViewColumn Header="Dag" DisplayMemberBinding="{Binding Dag}" Width="150" />
-                    <GridViewColumn Header="Klokken" DisplayMemberBinding="{Binding Klokken}" Width="150" />
+                    <GridViewColumn Header="Starttid" DisplayMemberBinding="{Binding Klokken}" Width="150" />
+                    <GridViewColumn Header="Sluttid" DisplayMemberBinding="{Binding Sluttid}" Width="150" />
                     <GridViewColumn Header="Movie" DisplayMemberBinding="{Binding Movie}" Width="100" />
                 </GridView>
             </ListView.View>

@@ -30,9 +30,9 @@ namespace TheMovies_LLD_.Repository
                             ID = "1",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new TimeSpan(12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new TimeSpan(16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new TimeSpan(21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             },
                         },
                         new Biografsal
@@ -40,9 +40,9 @@ namespace TheMovies_LLD_.Repository
                             ID = "2",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new TimeSpan(12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new TimeSpan(16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new TimeSpan(21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             }
                         }
                     }
@@ -61,9 +61,9 @@ namespace TheMovies_LLD_.Repository
                             ID = "1",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new TimeSpan(12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new TimeSpan(16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new TimeSpan(21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             },
                         },
                         new Biografsal
@@ -71,9 +71,9 @@ namespace TheMovies_LLD_.Repository
                             ID = "2",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new TimeSpan(12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new TimeSpan(16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new TimeSpan(21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             }
                         },
                         new Biografsal
@@ -81,9 +81,9 @@ namespace TheMovies_LLD_.Repository
                             ID = "3",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new TimeSpan(12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new TimeSpan(16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new TimeSpan(21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             }
                         }
                     }
@@ -102,9 +102,9 @@ namespace TheMovies_LLD_.Repository
                             ID = "1",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new TimeSpan(12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new TimeSpan(16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new TimeSpan(21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             },
                         },
                         new Biografsal
@@ -112,9 +112,9 @@ namespace TheMovies_LLD_.Repository
                             ID = "2",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new TimeSpan(12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new TimeSpan(16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new TimeSpan(21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             }
                         }
                     }
