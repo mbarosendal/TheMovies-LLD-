@@ -16,12 +16,12 @@ namespace TheMovies_LLD_.Repository
         public MovieRepository()
         {
             _movies = new List<Movie>();
+            // testdata
             //{
             //    new Movie { Title = "Titanic", Duration = 120, Genre = "Drama, Romance" },
             //    new Movie { Title = "Inception", Duration = 148, Genre = "Sci-Fi" }
             //};
-            //SaveMovies(_movies);
-            LoadMoviesfromCSV();
+            //LoadMoviesfromCSV();
         }
 
         public void AddMovie(Movie movie)
@@ -44,10 +44,8 @@ namespace TheMovies_LLD_.Repository
             return _movies.Contains(movie);
         }
 
-        public void SaveMoviesToCSV(List<Movie> movies)
+        public void SaveMoviesToCSV(List<Movie> movies, string filePath = "movies.csv")
         {
-            string filePath = "movies.csv";
-
             using (StreamWriter sw = new StreamWriter(filePath))
             {
                 // Sæt headers i CSV-filen
@@ -63,10 +61,8 @@ namespace TheMovies_LLD_.Repository
             }
         }
 
-        public void LoadMoviesfromCSV()
+        public void LoadMoviesfromCSV(string filePath = "movies.csv")
         {
-            string filePath = "movies.csv";
-
             using (StreamReader sr = new StreamReader(filePath))
             {
                 // Læs først header (og skip den)
@@ -84,7 +80,7 @@ namespace TheMovies_LLD_.Repository
                     string Genre = movieLine[2];
 
                     // Tjek om filmen allerede er tilføjet via hjælpemetoden WasMovieAlreadyAdded (ud fra titel)
-                    if (WasMovieAlreadyAdded(Title))
+                    if (IsMovieAlreadyAdded(Title))
                     {
                         // Hvis filmen allerede er tilføjet, så fortsæt til næste linje i CSV-filen
                         continue;
@@ -106,7 +102,7 @@ namespace TheMovies_LLD_.Repository
         }
 
         // Hjælpemetode til at tjekke om filmen allerede er tilføjet
-        private bool WasMovieAlreadyAdded(string title)
+        private bool IsMovieAlreadyAdded(string title)
         {
             return _movies.Any(m => m.Title == title);
         }

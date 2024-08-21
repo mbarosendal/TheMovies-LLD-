@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TheMovies_LLD_.ViewModel;
+using TheMovies_LLD_.ViewModels;
+using ViewModels.SchedulingViewModel.cs;
 
 namespace TheMovies_LLD_.Views
 {
@@ -24,7 +25,7 @@ namespace TheMovies_LLD_.Views
         public SchedulePage()
         {
             InitializeComponent();
-            DataContext = new Scheduling();
+            DataContext = new SchedulingViewModel();
         }
     }
 }

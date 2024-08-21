@@ -2,9 +2,9 @@
 using System.IO;
 using TheMovies_LLD_.Models;
 
-namespace TheMovies_LLD_.ViewModel
+namespace TheMovies_LLD_.ViewModels
 {
-    // MovieViewModel-Klassen er fokuseret på selve film-objektet og:
+    // MovieViewModel-Klassen:
     // Indkapsler egenskaberne for en enkelt film.
     // Giver mulighed for at interagere med den underliggende films data.
     // Håndterer en films egenskabsændringer og opdaterer dem i UI.

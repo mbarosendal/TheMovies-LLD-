@@ -27,22 +27,22 @@ namespace TheMovies_LLD_.Repository
                     {
                         new Biografsal
                         {
-                            ID = "1",
+                            Id = "1",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Wednesday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { Dag = DayOfWeek.Wednesday, StartTid = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { Dag = DayOfWeek.Wednesday, StartTid = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { Dag = DayOfWeek.Wednesday, StartTid = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             },
                         },
                         new Biografsal
                         {
-                            ID = "2",
+                            Id = "2",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Thursday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { Dag = DayOfWeek.Thursday, StartTid = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { Dag = DayOfWeek.Thursday, StartTid = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { Dag = DayOfWeek.Thursday, StartTid = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             }
                         }
                     }
@@ -58,32 +58,32 @@ namespace TheMovies_LLD_.Repository
                     {
                         new Biografsal
                         {
-                            ID = "1",
+                            Id = "1",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Friday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { Dag = DayOfWeek.Friday, StartTid = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { Dag = DayOfWeek.Friday, StartTid = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { Dag = DayOfWeek.Friday, StartTid = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             },
                         },
                         new Biografsal
                         {
-                            ID = "2",
+                            Id = "2",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Saturday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { Dag = DayOfWeek.Saturday, StartTid = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { Dag = DayOfWeek.Saturday, StartTid = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { Dag = DayOfWeek.Saturday, StartTid = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             }
                         },
                         new Biografsal
                         {
-                            ID = "3",
+                            Id = "3",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Sunday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { Dag = DayOfWeek.Sunday, StartTid = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { Dag = DayOfWeek.Sunday, StartTid = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { Dag = DayOfWeek.Sunday, StartTid = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             }
                         }
                     }
@@ -99,22 +99,22 @@ namespace TheMovies_LLD_.Repository
                     {
                         new Biografsal
                         {
-                            ID = "1",
+                            Id = "1",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Monday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { Dag = DayOfWeek.Monday, StartTid = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { Dag = DayOfWeek.Monday, StartTid = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { Dag = DayOfWeek.Monday, StartTid = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             },
                         },
                         new Biografsal
                         {
-                            ID = "2",
+                            Id = "2",
                             Spilletider = new List<Spilletid>
                             {
-                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
-                                new Spilletid { DayOfWeek = DayOfWeek.Tuesday, TimeOfDay = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
+                                new Spilletid { Dag = DayOfWeek.Tuesday, StartTid = new DateTime(1, 1, 1, 12, 0, 0) }, // Friday at 12:00
+                                new Spilletid { Dag = DayOfWeek.Tuesday, StartTid = new DateTime(1, 1, 1, 16, 0, 0) }, // Friday at 16:00
+                                new Spilletid { Dag = DayOfWeek.Tuesday, StartTid = new DateTime(1, 1, 1, 21, 0, 0) }  // Friday at 21:00
                             }
                         }
                     }

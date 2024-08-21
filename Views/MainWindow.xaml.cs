@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TheMovies_LLD_.ViewModel;
+using TheMovies_LLD_.ViewModels;
 
 namespace TheMovies_LLD_.Views
 {

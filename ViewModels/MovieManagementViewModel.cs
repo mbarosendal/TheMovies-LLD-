@@ -15,11 +15,11 @@ using TheMovies_LLD_.Commands;
 using TheMovies_LLD_.Models;
 using TheMovies_LLD_.Repository;
 
-namespace TheMovies_LLD_.ViewModel
+namespace TheMovies_LLD_.ViewModels
 {
     // MainViewModel-klassen:
     // Håndterer de handlinger, der udføres på film-kollektionen i UI, såsom at tilføje, fjerne og rydde dem.
-    // KOnverterer og behandler input fra UI til lagring i datalaget (via repositories) og viser kollektionen til UI.
+    // KOnverterer og behandler input fra UI til lagring af film i datalaget (MovieRepository) og viser de gemte film til UI.
     // Håndterer meddelelser om egenskabsændringer for den overordnede applikationstilstand.
     // Delegerer den specifikke filmrelaterede logik til MovieViewModel.
 
@@ -27,20 +27,17 @@ namespace TheMovies_LLD_.ViewModel
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private readonly MovieRepository _movieRepository;
-        public ObservableCollection<MovieViewModel> Movies { get; } // + full property med OnPropChanged og backing field i stedet for movieviewmodel?
-        
+        public ObservableCollection<MovieViewModel> Movies { get; }        
         public MovieViewModel MovieToAdd { get; set; }
-        public MovieViewModel SelectedMovie { get; set; }
-        
-        public ICommand AddCommand { get; set; }
-        public ICommand ClearCommand { get; set; }
-        public ICommand RemoveCommand { get; set;}
-        
+        public MovieViewModel SelectedMovie { get; set; }      
         private int _selectedHours;
         private int _selectedMinutes;
         private TimeSpan _duration;
         public List<int> Hours => Enumerable.Range(0, 10).ToList();
         public List<int> Minutes => Enumerable.Range(0, 60).ToList();
+        public ICommand AddCommand { get; set; }
+        public ICommand ClearCommand { get; set; }
+        public ICommand RemoveCommand { get; set; }
 
         public TimeSpan Duration
         {
@@ -80,7 +77,8 @@ namespace TheMovies_LLD_.ViewModel
         public MovieManagementViewModel()
         {
             _movieRepository = new MovieRepository();
-            // Opretter en ObservableCollection af MovieViewModels, som indeholder alle film-objekter konverteret til MovieViewModels-objekter (LINQ)
+            // Movies indeholder alle film-objekter fra MovieRepository konverteret til MovieViewModels-objekter (LINQ), så de kan vises i UI
+            _movieRepository.LoadMoviesfromCSV();
             Movies = new ObservableCollection<MovieViewModel>(_movieRepository.GetAllMovies()
                                                 .Select(movie => new MovieViewModel(movie)));
             MovieToAdd = new MovieViewModel(new Movie());
@@ -117,7 +115,7 @@ namespace TheMovies_LLD_.ViewModel
 
         private bool CanAddMovie()
         {
-            // Tjekker om alle værdier er udfyldt via hjælpemetode
+            // Kan kun trykke "Add", hvis alle værdier er udfyldt. Det tjekkes i metoden HasAllValues()
             return HasAllValues();
         }
 

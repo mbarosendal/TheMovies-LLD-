@@ -1,30 +1,32 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using TheMovies_LLD_.Commands;
 using TheMovies_LLD_.Models;
 using TheMovies_LLD_.Repository;
 
-public class Scheduling : INotifyPropertyChanged
+// SchedulingViewModel-klassen:
+// Behandler data fra forskellige model-klasser (Biograf, Movie, Forestilling, Biografsal og Spilletid)
+// Står for at tilføje en forestilling til datalaget (ForestillingRepository) og vise forestillinger i UI
+
+namespace ViewModels.SchedulingViewModel.cs
+{ 
+public class SchedulingViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
-
     private BiografRepository _biografRepository;
     private MovieRepository _movieRepository;
     private ForestillingRepository _forestillingRepository;
-
-    // Biografer og film skal ikke kunne ændres, så de er readonly
     public ObservableCollection<Biograf> Biografer { get; }
     public ObservableCollection<Movie> Movies { get; }
     private ObservableCollection<Biografsal> _biografsale;
     private ObservableCollection<Spilletid> _spilletider;
     public ObservableCollection<Forestilling> Forestillinger { get; set; }
-
     private Biograf _selectedBiograf;
     private Biografsal _selectedBiografsal;
     private Movie _selectedMovie;
     private Spilletid _selectedSpilletid;
-
     public ICommand AddForestillingCommand { get; set; }
 
     public ObservableCollection<Spilletid> Spilletider
@@ -92,10 +94,11 @@ public class Scheduling : INotifyPropertyChanged
         }
     }
 
-    public Scheduling()
+    public SchedulingViewModel()
     {
         _biografRepository = new BiografRepository();
         _movieRepository = new MovieRepository();
+        _movieRepository.LoadMoviesfromCSV();
         _forestillingRepository = new ForestillingRepository();
         Biografer = new ObservableCollection<Biograf>(_biografRepository.GetAllBiografer());
         Movies = new ObservableCollection<Movie>(_movieRepository.GetAllMovies());
@@ -107,7 +110,7 @@ public class Scheduling : INotifyPropertyChanged
 
     private bool CanAddForestilling()
     {
-        // Tjekker om alle værdier er valgt før der kan tilføjes en forestilling
+        // Tjekker om alle værdier er valgt i UI før der kan tilføjes en forestilling
         if (SelectedBiograf != null && 
             SelectedBiografsal != null && 
             SelectedMovie != null && 
@@ -121,23 +124,31 @@ public class Scheduling : INotifyPropertyChanged
         }
     }
 
-    // tilføjer en forestilling til listen og til databasen ud fra valgte værdier
+    // Tilføjer en forestilling til listen og til databasen ud fra de valgte værdier
+    // og tjekker for overlappende forestillinger via hjælpemetoden AreForestillingerOverlapping()
     private void AddForestilling()
     {
-        DateTime startTime = SelectedSpilletid.TimeOfDay;
-        TimeSpan playTime = SelectedMovie.Duration;
-        string endTime = CalculateEndTimeWithCleaningAndCommercials(startTime, playTime).ToString("HH:mm");
+        DateTime forestillingStartTime = SelectedSpilletid.StartTid;
+        TimeSpan movieDuration = SelectedMovie.Duration;
+        DateTime calculatedForestillingEndTime = CalculateEndTimeWithCleaningAndCommercials(forestillingStartTime, movieDuration);
 
         var newForestilling = new Forestilling
         {
             Biograf = SelectedBiograf.Biografkæde,
             By = SelectedBiograf.By,
-            Biografsal = SelectedBiografsal.ID,
-            Dag = SelectedSpilletid.DayOfWeek.ToString(),
-            Klokken = SelectedSpilletid.TimeOfDay.ToString("HH:mm"),
-            Sluttid = endTime,
-            Movie = SelectedMovie.Title
+            Biografsal = SelectedBiografsal.Id,
+            Dag = SelectedSpilletid.Dag.ToString(),
+            Starttid = SelectedSpilletid.StartTid,
+            Sluttid = calculatedForestillingEndTime,
+            Movie = SelectedMovie
         };
+
+        // Check for overlapping forestilling
+        if (_forestillingRepository.AreForestillingerOverlapping(newForestilling, forestillingStartTime, calculatedForestillingEndTime))
+        {
+            MessageBox.Show("Fejl: Forestilling overlapper med en anden forestilling.");
+            return;
+        }
 
         _forestillingRepository.AddForestilling(newForestilling);
 
@@ -186,4 +197,5 @@ public class Scheduling : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+}
 }

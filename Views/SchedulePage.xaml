@@ -30,9 +30,8 @@
         <TextBlock Text="Film" FontSize="15" Grid.Row="1" Grid.Column="3" Margin="10,0,0,0"/>
 
         <ListBox ItemsSource="{Binding Biografer}" SelectedItem="{Binding SelectedBiograf, Mode=TwoWay}" DisplayMemberPath="Summary" Grid.Row="2" Grid.Column="0" />
-        <ListBox ItemsSource="{Binding Biografsale}" DisplayMemberPath="ID" SelectedItem="{Binding SelectedBiografsal, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" />
-        <ListBox ItemsSource="{Binding Spilletider}" DisplayMemberPath="Summary" SelectedItem="{Binding SelectedSpilletid, Mode=TwoWay}" Grid.Row="2" Grid.Column="2" />
-        
+        <ListBox ItemsSource="{Binding Biografsale}" DisplayMemberPath="Id" SelectedItem="{Binding SelectedBiografsal, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" />
+        <ListBox ItemsSource="{Binding Spilletider}" DisplayMemberPath="Summary" SelectedItem="{Binding SelectedSpilletid, Mode=TwoWay}" Grid.Row="2" Grid.Column="2" />        
         <ListBox ItemsSource="{Binding Movies}" SelectedItem="{Binding SelectedMovie, Mode=TwoWay}" DisplayMemberPath="Summary" Grid.Row="2" Grid.Column="3" Margin="10,0,0,0"/>
 
         <Button Content="Tilføj forestilling" Command="{Binding AddForestillingCommand}" Grid.Column="3" />
@@ -40,13 +39,13 @@
         <ListView x:Name="Forestillinger" ItemsSource="{Binding Forestillinger, Mode=TwoWay}" Grid.Row="3" Grid.ColumnSpan="4">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="By" DisplayMemberBinding="{Binding By}" Width="100"/>
-                    <GridViewColumn Header="Biograf" DisplayMemberBinding="{Binding Biograf}" Width="150" />
-                    <GridViewColumn Header="Biografsal" DisplayMemberBinding="{Binding Biografsal}" Width="150" />
-                    <GridViewColumn Header="Dag" DisplayMemberBinding="{Binding Dag}" Width="150" />
-                    <GridViewColumn Header="Starttid" DisplayMemberBinding="{Binding Klokken}" Width="150" />
-                    <GridViewColumn Header="Sluttid" DisplayMemberBinding="{Binding Sluttid}" Width="150" />
-                    <GridViewColumn Header="Movie" DisplayMemberBinding="{Binding Movie}" Width="100" />
+                    <GridViewColumn Header="By" DisplayMemberBinding="{Binding By}" Width="75"/>
+                    <GridViewColumn Header="Biograf" DisplayMemberBinding="{Binding Biograf}" Width="75" />
+                    <GridViewColumn Header="Sal" DisplayMemberBinding="{Binding Biografsal}" Width="50" />
+                    <GridViewColumn Header="Dag" DisplayMemberBinding="{Binding Dag}" Width="50" />
+                    <GridViewColumn Header="Starttid" DisplayMemberBinding="{Binding Starttid}" Width="50" />
+                    <GridViewColumn Header="Sluttid" DisplayMemberBinding="{Binding Sluttid}" Width="50" />
+                    <GridViewColumn Header="Film" DisplayMemberBinding="{Binding Movie.Title}" Width="100" />
                 </GridView>
             </ListView.View>
         </ListView>

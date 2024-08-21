@@ -26,7 +26,7 @@
             <TextBox Text="{Binding MovieToAdd.Title, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/>
             <TextBlock Text="Varighed:"/>
             <!-- <TextBox Text="{Binding MovieToAdd.Duration, UpdateSourceTrigger=PropertyChanged}" Width="300" Height="35"/> -->
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="LEft">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="Timer:" Margin="5,0,5,0"/>
                 <ComboBox ItemsSource="{Binding Hours}" SelectedItem="{Binding SelectedHours, Mode=TwoWay}" Width="40" />
                 <TextBlock Text="Minutter:" Margin="5,0,5,0"/>
