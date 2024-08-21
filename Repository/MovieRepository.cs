@@ -102,7 +102,7 @@ namespace TheMovies_LLD_.Repository
         }
 
         // Hjælpemetode til at tjekke om filmen allerede er tilføjet
-        private bool IsMovieAlreadyAdded(string title)
+        public bool IsMovieAlreadyAdded(string title)
         {
             return _movies.Any(m => m.Title == title);
         }

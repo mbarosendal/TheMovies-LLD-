@@ -31,8 +31,7 @@ namespace TheMovies_LLD_.Repository
             return forestillinger;
         }
 
-        // Tjek om der er en forestilling der allerede er i forestillinger-listen, som har samme biograf, by, biografsal, dag og starttid, og som ligger inden for samme tidsinterval
-        //// Den kunne returnere forestillingen og meddele brugeren hvilken forestilling der overlapper?
+        // Tjek om der allerede findes en forestilling med samme biograf, by, biografsal, dag og starttid, og som ligger inden for samme tidsinterval
         public bool AreForestillingerOverlapping(Forestilling forestilling, DateTime startTime, DateTime endTime)
         {
             return forestillinger.Any(f =>
@@ -41,6 +40,7 @@ namespace TheMovies_LLD_.Repository
                 f.Biografsal == forestilling.Biografsal &&
                 f.Dag == forestilling.Dag &&
                 (
+                // Tjekker om en forestilling starter før en anden slutter, og om en forestilling slutter efter en anden starter
                     (f.Starttid < endTime && f.Sluttid > startTime)
                 )
             );

@@ -145,6 +145,12 @@ namespace TheMovies_LLD_.ViewModels
 
             _movieRepository.AddMovie(newMovie);
 
+            if (_movieRepository.IsMovieAlreadyAdded(newMovie.Title))
+            { 
+                MessageBox.Show("Titlen på filmen findes allerede.");
+                return;
+            }
+
             Movies.Add(new MovieViewModel(newMovie));
 
             _movieRepository.SaveMoviesToCSV(_movieRepository.GetAllMovies());

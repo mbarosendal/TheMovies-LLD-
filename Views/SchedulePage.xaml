@@ -42,9 +42,9 @@
                     <GridViewColumn Header="By" DisplayMemberBinding="{Binding By}" Width="75"/>
                     <GridViewColumn Header="Biograf" DisplayMemberBinding="{Binding Biograf}" Width="75" />
                     <GridViewColumn Header="Sal" DisplayMemberBinding="{Binding Biografsal}" Width="50" />
-                    <GridViewColumn Header="Dag" DisplayMemberBinding="{Binding Dag}" Width="50" />
-                    <GridViewColumn Header="Starttid" DisplayMemberBinding="{Binding Starttid}" Width="50" />
-                    <GridViewColumn Header="Sluttid" DisplayMemberBinding="{Binding Sluttid}" Width="50" />
+                    <GridViewColumn Header="Dag" DisplayMemberBinding="{Binding Dag}" Width="75" />
+                    <GridViewColumn Header="Starttid" DisplayMemberBinding="{Binding Starttid, StringFormat='{}{0:HH:mm}'}" Width="50" />
+                    <GridViewColumn Header="Sluttid" DisplayMemberBinding="{Binding Sluttid, StringFormat='{}{0:HH:mm}'}" Width="50" />
                     <GridViewColumn Header="Film" DisplayMemberBinding="{Binding Movie.Title}" Width="100" />
                 </GridView>
             </ListView.View>
