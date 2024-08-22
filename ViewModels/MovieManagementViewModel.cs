@@ -133,6 +133,12 @@ namespace TheMovies_LLD_.ViewModels
 
         private void AddMovie()
         {
+            if (_movieRepository.IsMovieAlreadyAdded(MovieToAdd.Title))
+            {
+                MessageBox.Show("Titlen på filmen findes allerede.");
+                return;
+            }
+
             // Opretter et nyt Movie-objekt ud fra værdierne i MovieToAdd-instanset
             var newMovie = new Movie
             {
@@ -144,12 +150,6 @@ namespace TheMovies_LLD_.ViewModels
             };
 
             _movieRepository.AddMovie(newMovie);
-
-            if (_movieRepository.IsMovieAlreadyAdded(newMovie.Title))
-            { 
-                MessageBox.Show("Titlen på filmen findes allerede.");
-                return;
-            }
 
             Movies.Add(new MovieViewModel(newMovie));
 
@@ -165,10 +165,10 @@ namespace TheMovies_LLD_.ViewModels
             MovieToAdd.Director = string.Empty;
             MovieToAdd.PremiereDate = DateTime.MinValue;
         }
+
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }
